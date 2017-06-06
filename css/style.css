@@ -3,5 +3,16 @@
 }
 
 h1 {
-  color: blue;
+  color: black;
+}
+
+input[type=text],
+input[type=radio],
+input[type=submit],
+textarea {
+	width: 100%;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
