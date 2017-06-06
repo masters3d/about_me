@@ -9,19 +9,27 @@
     <script src="js/app.js"></script>
 
     <form action="#" onsubmit="return guessingGame(this);">
+      Do I speak Spanish?:<br>
+      <input type="radio" name="userResponse" value="Yes"> Yes<br>
+      <input type="radio" name="userResponse" value="No"> No<br>
+      <input type="hidden" name="answer" value="Yes">
+      <input type="submit" value="Submit"><br>
+    </form><br>
+
+    <form action="#" onsubmit="return guessingGame(this);">
       What is the name of my first born?:<br>
-      <input type="radio" name="userResponse" value="Alana"> Male<br>
-      <input type="radio" name="userResponse" value="Liana"> Female<br>
-      <input type="radio" name="userResponse" value="Ariana"> Other<br>
+      <input type="radio" name="userResponse" value="Alana"> Alana<br>
+      <input type="radio" name="userResponse" value="Liana"> Liana<br>
+      <input type="radio" name="userResponse" value="Ariana"> Ariana<br>
       <input type="hidden" name="answer" value="Liana">
       <input type="submit" value="Submit"><br>
     </form><br>
 
     <form action="#" onsubmit="return guessingGame(this);">
       What is my favority color?:<br>
-      <input type="radio" name="userResponse" value="Blue"> Male<br>
-      <input type="radio" name="userResponse" value="Red"> Female<br>
-      <input type="radio" name="userResponse" value="Green"> Other<br>
+      <input type="radio" name="userResponse" value="Blue"> Blue<br>
+      <input type="radio" name="userResponse" value="Red"> Red<br>
+      <input type="radio" name="userResponse" value="Green"> Green<br>
       <input type="hidden" name="answer" value="Green">
       <input type="submit" value="Submit"><br>
     </form><br>

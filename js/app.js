@@ -12,6 +12,7 @@ function guessingGame(form) {
     let points = 'You have ' + counter + ' point(s).'
     alert('Sorry! Try again. ' + points)
   }
+  console.log('The user answered: ' + form.userResponse.value)
 }
 
 window.onload = function() {
