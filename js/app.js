@@ -1,6 +1,7 @@
 'use strict';
 
 var counter = 0;
+var nameOfUser = 'noNameProvided';
 
 function guessingGame(form) {
   if (form.userResponse.value === form.answer.value) {
@@ -11,4 +12,9 @@ function guessingGame(form) {
     let points = 'You have ' + counter + ' point(s).'
     alert('Sorry! Try again. ' + points)
   }
+}
+
+window.onload = function() {
+  nameOfUser = prompt( 'Welcome to my page. Please tell me your name:')
+  alert('Hi ' + nameOfUser + '! Please answer some questions to play my game.')
 }
