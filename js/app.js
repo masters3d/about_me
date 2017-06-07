@@ -8,8 +8,10 @@ function guessingGame(form) { // eslint-disable-line no-unused-vars
   if (form.userResponse.value === form.answer.value) {
     counter += 1;
     let points = 'You have ' + counter + ' point(s).';
+
     alert('You got it right! ' + points);
   } else {
+    counter += -1;
     let points = 'You have ' + counter + ' point(s).';
     alert('Sorry! Try again. ' + points);
   }
