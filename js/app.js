@@ -7,13 +7,13 @@ var nameOfUser = 'noNameProvided';
 function guessingGame(form) { // eslint-disable-line no-unused-vars
   if (form.userResponse.value === form.answer.value) {
     counter += 1;
-    let points = 'You have ' + counter + ' point(s).';
+    var points1 = 'You have ' + counter + ' point(s).';
 
-    alert('You got it right! ' + points);
+    alert('You got it right! ' + points1);
   } else {
     counter += -1;
-    let points = 'You have ' + counter + ' point(s).';
-    alert('Sorry! Try again. ' + points);
+    var points2 = 'You have ' + counter + ' point(s).';
+    alert('Sorry! Try again. ' + points2);
   }
   console.log('The user answered: ' + form.userResponse.value);
 }
