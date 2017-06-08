@@ -30,15 +30,18 @@ nameOfUser = getName ? getName : nameOfUser;
 alert('Hi ' + nameOfUser + '! Please answer some questions to play my game.');
 
 while(!(questions.length < score || score < -questions.length || response === 'quit')){
-
+  console.log('user response is: ' + response);
   // Create a random number between min and max that has not been visited yet
   var randomNumber  = -1;
-  while(visitedQuestions.includes(randomNumber) || !visitedQuestions.length > questions.length) {
-    var max = questions.length - 1;
+  while(visitedQuestions.includes(randomNumber)) {
+    if (visitedQuestions.length > questions.length) { break; }
+    var max = questions.length;
     var min = 0;
     randomNumber = Math.floor(Math.random() * (max - min)) + min;
     console.log('random: ' + randomNumber);
   }
+  visitedQuestions.push(randomNumber);
+  console.log('visited questions: ' + visitedQuestions);
   console.log('random item selected from list: ' + randomNumber);
   var question = questions[randomNumber][0];
   var possibleAnswers = questions[randomNumber][1];
@@ -50,8 +53,10 @@ while(!(questions.length < score || score < -questions.length || response === 'q
   // Ask user question:
   var currentTries = 0;
   while (allowedTries > currentTries && response !== 'quit'){
+    console.log('user response is: ' + response);
     response = prompt(question);
     response = response ? response.toLowerCase() : '';
+    if (response === 'quit') { break;}
     if(possibleAnswers.includes(response)) {
       score += 1;
       var points1 = 'You have ' + score + ' point(s).';
@@ -78,9 +83,11 @@ while(!(questions.length < score || score < -questions.length || response === 'q
       var triesReport2 = currentTries + '/' + allowedTries + ' tries.';
       alert('Please keep trying. ' + triesReport2 + points2);
     }
-
+    if (response === 'quit') { break; }
   } // question loop
   console.log(nameOfUser + ' answered: ' + response);
-  response = prompt('Press OK for next question or you can stop the game by entering \'quit\' at any prompt during the game.');
+  if (response === 'quit') { break; }
+  var questionLeftStatus = visitedQuestions.length - 1 + '/' + questions.length + ' Question(s).';
+  response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
 } // Game Loop
 alert('Thank you for playing ' + nameOfUser + '! Final score: ' + score);
