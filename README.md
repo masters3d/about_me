@@ -1,2 +1,5 @@
 # about_me
-About Me
+About Me, Jose Cheyo Jimenez
+
+* Driver: Drew Biehle
+* Navigator: Jose, himself

@@ -36,59 +36,72 @@ while(!(questions.length < score || score < -questions.length || response === 'q
   var randomNumber  = -1;
   while(visitedQuestions.includes(randomNumber)) {
     if (visitedQuestions.length > questions.length) { break; }
-    var max = questions.length;
-    var min = 0;
-    randomNumber = Math.floor(Math.random() * (max - min)) + min;
+    randomNumber = randomGenerator(questions.length);
     console.log('random: ' + randomNumber);
   }
+
+  function randomGenerator(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   visitedQuestions.push(randomNumber);
   console.log('visited questions: ' + visitedQuestions);
   console.log('random item selected from list: ' + randomNumber);
-  var question = questions[randomNumber][0];
-  var possibleAnswers = questions[randomNumber][1];
-  var allowedTries = questions[randomNumber][2];
-  var hintWarmCold = questions[randomNumber][3];
-  var firstAnswer = possibleAnswers[0];
-  var typeOfAnswer = isNaN(parseInt(firstAnswer)) ? typeof('abc') : typeof(123);
 
-  // Ask user question:
-  var currentTries = 0;
-  while (allowedTries > currentTries && response !== 'quit'){
-    console.log('user response is: ' + response);
-    response = prompt(question);
-    response = response ? response.toLowerCase() : '';
-    if (response === 'quit') { break;}
-    if(possibleAnswers.includes(response)) {
-      score += 1;
-      var points1 = 'You have ' + score + ' point(s).';
-      alert(nameOfUser + '! You got it right! ' + points1);
-      break;
-    }
-    // We will provide some hints when answer not found
-    if (hintWarmCold) {
-      currentTries += 1;
-      var comparedResult = response.localeCompare(firstAnswer,'kn', {numeric : 'true'});
-      // null should not happend here because we are checking for equal above
-      var warmCold = comparedResult === 1 ? true : comparedResult === -1 ? false : null;
-      var triesReport1 = currentTries + '/' + allowedTries + ' tries.';
-      var keepTrying =  ' ' + triesReport1 + ' Dont give up!';
-      if (typeOfAnswer === typeof('abc')) {
-        alert('You are getting ' + (warmCold ? 'warmer. ' : 'colder. ') + keepTrying);
-      } else if (typeOfAnswer === typeof(123)) {
-        alert('You value is ' + (warmCold ? 'higher' : 'lower') + ' than the answer.' + keepTrying);
+  function questionLogic () {
+    var question = questions[randomNumber][0];
+    var possibleAnswers = questions[randomNumber][1];
+    var allowedTries = questions[randomNumber][2];
+    var hintWarmCold = questions[randomNumber][3];
+    var firstAnswer = possibleAnswers[0];
+    var typeOfAnswer = isNaN(parseInt(firstAnswer)) ? typeof('abc') : typeof(123);
+
+    // Ask user question:
+    var currentTries = 0;
+    while (allowedTries > currentTries && response !== 'quit'){
+      console.log('user response is: ' + response);
+      response = prompt(question);
+      response = response ? response.toLowerCase() : '';
+      if (response === 'quit') { break;}
+      if(possibleAnswers.includes(response)) {
+        score += 1;
+        var points1 = 'You have ' + score + ' point(s).';
+        alert(nameOfUser + '! You got it right! ' + points1);
+        break;
       }
-    } else {
-      currentTries += 1;
-      score += -1;
-      var points2 = ' You have ' + score + ' point(s).';
-      var triesReport2 = currentTries + '/' + allowedTries + ' tries.';
-      alert('Please keep trying. ' + triesReport2 + points2);
-    }
-    if (response === 'quit') { break; }
-  } // question loop
-  console.log(nameOfUser + ' answered: ' + response);
+      // We will provide some hints when answer not found
+      if (hintWarmCold) {
+        currentTries += 1;
+        var comparedResult = response.localeCompare(firstAnswer,'kn', {numeric : 'true'});
+        // null should not happend here because we are checking for equal above
+        var warmCold = comparedResult === 1 ? true : comparedResult === -1 ? false : null;
+        var triesReport1 = currentTries + '/' + allowedTries + ' tries.';
+        var keepTrying =  ' ' + triesReport1 + ' Dont give up!';
+        if (typeOfAnswer === typeof('abc')) {
+          alert('You are getting ' + (warmCold ? 'warmer. ' : 'colder. ') + keepTrying);
+        } else if (typeOfAnswer === typeof(123)) {
+          alert('You value is ' + (warmCold ? 'higher' : 'lower') + ' than the answer.' + keepTrying);
+        }
+      } else {
+        currentTries += 1;
+        score += -1;
+        var points2 = ' You have ' + score + ' point(s).';
+        var triesReport2 = currentTries + '/' + allowedTries + ' tries.';
+        alert('Please keep trying. ' + triesReport2 + points2);
+      }
+      if (response === 'quit') { break; }
+    } // question loop
+  } // end of function
+
+  questionLogic();
+
   if (response === 'quit') { break; }
-  var questionLeftStatus = visitedQuestions.length - 1 + '/' + questions.length + ' Question(s).';
-  response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
+  quitInfommercial();
+
+  function quitInfommercial () {
+    console.log(nameOfUser + ' answered: ' + response);
+    var questionLeftStatus = visitedQuestions.length - 1 + '/' + questions.length + ' Question(s).';
+    response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
+  }
 } // Game Loop
 alert('Thank you for playing ' + nameOfUser + '! Final score: ' + score);
