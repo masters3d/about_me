@@ -95,9 +95,13 @@ while(!(questions.length < score || score < -questions.length || response === 'q
 
   questionLogic();
 
-  console.log(nameOfUser + ' answered: ' + response);
   if (response === 'quit') { break; }
-  var questionLeftStatus = visitedQuestions.length - 1 + '/' + questions.length + ' Question(s).';
-  response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
+  quitInfommercial();
+
+  function quitInfommercial () {
+    console.log(nameOfUser + ' answered: ' + response);
+    var questionLeftStatus = visitedQuestions.length - 1 + '/' + questions.length + ' Question(s).';
+    response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
+  }
 } // Game Loop
 alert('Thank you for playing ' + nameOfUser + '! Final score: ' + score);
