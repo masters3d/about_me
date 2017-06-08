@@ -30,6 +30,7 @@ nameOfUser = getName ? getName : nameOfUser;
 alert('Hi ' + nameOfUser + '! Please answer some questions to play my game.');
 
 while(!(questions.length < score || score < -questions.length || response === 'quit')){
+  if (visitedQuestions.length > questions.length) { break; }
   console.log('user response is: ' + response);
   // Create a random number between min and max that has not been visited yet
   var randomNumber  = -1;
