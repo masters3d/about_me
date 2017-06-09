@@ -1,7 +1,5 @@
 'use strict';
 
-var score = 0;
-var nameOfUser = 'Friend';
 // question | possibleAnswers | TriesAllowed | Warm or Cold
 var q1 = ['Do I speak Spanish?',
         ['yes'], 1, false];
@@ -18,36 +16,27 @@ var q6 = ['What is my favority type of icecream?',
 var q7 = ['What number am I thinking about right now?',
           ['7'], 6, true];
 
+// VARIABLES
 var questions = [q1,q2,q3,q4,q5,q6,q7];
-// In game varibles
 var response = '';
-// we will store indexes of visited questions here
-var visitedQuestions = [-1];
+var score = 0;
+var nameOfUser = 'Friend'; // Default if none given
 
 var welcome = 'Welcome to my page. Please tell me your name:';
 var getName = prompt(welcome);
 nameOfUser = getName ? getName : nameOfUser;
 alert('Hi ' + nameOfUser + '! Please answer some questions to play my game.');
 
-while(!(questions.length < score || score < -questions.length || response === 'quit')){
-  if (visitedQuestions.length > questions.length) { break; }
+// We will shuffle the array to get different orders
+questions = shuffle(questions);
+
+for (var i = 0; i < questions.length; i += 1) {
   console.log('user response is: ' + response);
-  // Create a random number between min and max that has not been visited yet
-  var randomNumber  = -1;
-  while(visitedQuestions.includes(randomNumber)) {
-    if (visitedQuestions.length > questions.length) { break; }
-    var max = questions.length;
-    var min = 0;
-    randomNumber = Math.floor(Math.random() * (max - min)) + min;
-    console.log('random: ' + randomNumber);
-  }
-  visitedQuestions.push(randomNumber);
-  console.log('visited questions: ' + visitedQuestions);
-  console.log('random item selected from list: ' + randomNumber);
-  var question = questions[randomNumber][0];
-  var possibleAnswers = questions[randomNumber][1];
-  var allowedTries = questions[randomNumber][2];
-  var hintWarmCold = questions[randomNumber][3];
+  console.log('visited questions: ' + ( i + 1 ));
+  var question = questions[i][0];
+  var possibleAnswers = questions[i][1];
+  var allowedTries = questions[i][2];
+  var hintWarmCold = questions[i][3];
   var firstAnswer = possibleAnswers[0];
   var typeOfAnswer = isNaN(parseInt(firstAnswer)) ? typeof('abc') : typeof(123);
 
@@ -88,7 +77,29 @@ while(!(questions.length < score || score < -questions.length || response === 'q
   } // question loop
   console.log(nameOfUser + ' answered: ' + response);
   if (response === 'quit') { break; }
-  var questionLeftStatus = visitedQuestions.length - 1 + '/' + questions.length + ' Question(s).';
+  var questionLeftStatus = i + 1 + '/' + questions.length + ' Question(s).';
   response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
 } // Game Loop
 alert('Thank you for playing ' + nameOfUser + '! Final score: ' + score);
+
+
+/// HELPER FUNCTIONS:
+//https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
