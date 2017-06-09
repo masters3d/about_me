@@ -15,9 +15,21 @@ var q6 = ['What is my favority type of icecream?',
         ['strawberry','cherry','berry'], 4, true];
 var q7 = ['What number am I thinking about right now?',
           ['7'], 6, true];
+var q6 = ['What is my favority type of icecream?',
+        ['strawberry','cherry','berry'], 4, true];
+var q7 = ['What number am I thinking about right now?',
+          ['7'], 6, true];
+var q8 = ['Did I gradute in Washington'
+          ['yes'], 1, false];
+var q9 = ['Am I married?'
+          ['yes'], 1, false];
+var q10 = ['Do I have sibblings?'
+          ['yes'], 1, false];
+var q11 = ['Did I graduate from U.W.?'
+          ['no'], 1, false];
 
 // VARIABLES
-var questions = [q1,q2,q3,q4,q5,q6,q7];
+var questions = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11];
 var response = '';
 var score = 0;
 var nameOfUser = 'Friend'; // Default if none given
