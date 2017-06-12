@@ -33,63 +33,64 @@ var nameOfUser = 'Friend'; // Default if none given
 var welcome = 'Welcome to my page. Please tell me your name:';
 var getName = prompt(welcome);
 nameOfUser = getName ? getName : nameOfUser;
-alert('Hi ' + nameOfUser + '! Please answer some questions to play my game.');
+alert('Hi ' + nameOfUser + '! Please click on Start Guessing Game to play a questions game about me.');
 
+function guessingGame(){ // eslint-disable-line no-unused-vars
 // We will shuffle the array to get different orders
-questions = shuffle(questions);
+  questions = shuffle(questions);
 
-for (var i = 0; i < questions.length; i += 1) {
-  console.log('user response is: ' + response);
-  console.log('visited questions: ' + ( i + 1 ));
-  var question = questions[i][0];
-  var possibleAnswers = questions[i][1];
-  var allowedTries = questions[i][2];
-  var hintWarmCold = questions[i][3];
-  var firstAnswer = possibleAnswers[0];
-  var typeOfAnswer = isNaN(parseInt(firstAnswer)) ? typeof('abc') : typeof(123);
-
-  // Ask user question:
-  var currentTries = 0;
-  while (allowedTries > currentTries && response !== 'quit'){
+  for (var i = 0; i < questions.length; i += 1) {
     console.log('user response is: ' + response);
-    response = prompt(question);
-    response = response ? response.toLowerCase() : '';
-    if (response === 'quit') { break;}
-    if(possibleAnswers.includes(response)) {
-      score += 1;
-      var points1 = 'You have ' + score + ' point(s).';
-      alert(nameOfUser + '! You got it right! ' + points1);
-      break;
-    }
-    // We will provide some hints when answer not found
-    if (hintWarmCold) {
-      currentTries += 1;
-      var comparedResult = response.localeCompare(firstAnswer,'kn', {numeric : 'true'});
-      // null should not happend here because we are checking for equal above
-      var warmCold = comparedResult === 1 ? true : comparedResult === -1 ? false : null;
-      var triesReport1 = currentTries + '/' + allowedTries + ' tries.';
-      var keepTrying =  ' ' + triesReport1 + ' Dont give up!';
-      if (typeOfAnswer === typeof('abc')) {
-        alert('You are getting ' + (warmCold ? 'warmer. ' : 'colder. ') + keepTrying);
-      } else if (typeOfAnswer === typeof(123)) {
-        alert('You value is ' + (warmCold ? 'higher' : 'lower') + ' than the answer.' + keepTrying);
-      }
-    } else {
-      currentTries += 1;
-      score += -1;
-      var points2 = ' You have ' + score + ' point(s).';
-      var triesReport2 = currentTries + '/' + allowedTries + ' tries.';
-      alert('Please keep trying. ' + triesReport2 + points2);
-    }
-    if (response === 'quit') { break; }
-  } // question loop
-  console.log(nameOfUser + ' answered: ' + response);
-  if (response === 'quit') { break; }
-  var questionLeftStatus = i + 1 + '/' + questions.length + ' Question(s).';
-  response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
-} // Game Loop
-alert('Thank you for playing ' + nameOfUser + '! Final score: ' + score);
+    console.log('visited questions: ' + ( i + 1 ));
+    var question = questions[i][0];
+    var possibleAnswers = questions[i][1];
+    var allowedTries = questions[i][2];
+    var hintWarmCold = questions[i][3];
+    var firstAnswer = possibleAnswers[0];
+    var typeOfAnswer = isNaN(parseInt(firstAnswer)) ? typeof('abc') : typeof(123);
 
+    // Ask user question:
+    var currentTries = 0;
+    while (allowedTries > currentTries && response !== 'quit'){
+      console.log('user response is: ' + response);
+      response = prompt(question);
+      response = response ? response.toLowerCase() : '';
+      if (response === 'quit') { break;}
+      if(possibleAnswers.includes(response)) {
+        score += 1;
+        var points1 = 'You have ' + score + ' point(s).';
+        alert(nameOfUser + '! You got it right! ' + points1);
+        break;
+      }
+      // We will provide some hints when answer not found
+      if (hintWarmCold) {
+        currentTries += 1;
+        var comparedResult = response.localeCompare(firstAnswer,'kn', {numeric : 'true'});
+        // null should not happend here because we are checking for equal above
+        var warmCold = comparedResult === 1 ? true : comparedResult === -1 ? false : null;
+        var triesReport1 = currentTries + '/' + allowedTries + ' tries.';
+        var keepTrying =  ' ' + triesReport1 + ' Dont give up!';
+        if (typeOfAnswer === typeof('abc')) {
+          alert('You are getting ' + (warmCold ? 'warmer. ' : 'colder. ') + keepTrying);
+        } else if (typeOfAnswer === typeof(123)) {
+          alert('You value is ' + (warmCold ? 'higher' : 'lower') + ' than the answer.' + keepTrying);
+        }
+      } else {
+        currentTries += 1;
+        score += -1;
+        var points2 = ' You have ' + score + ' point(s).';
+        var triesReport2 = currentTries + '/' + allowedTries + ' tries.';
+        alert('Please keep trying. ' + triesReport2 + points2);
+      }
+      if (response === 'quit') { break; }
+    } // question loop
+    console.log(nameOfUser + ' answered: ' + response);
+    if (response === 'quit') { break; }
+    var questionLeftStatus = i + 1 + '/' + questions.length + ' Question(s).';
+    response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
+  } // Game Loop
+  alert('Thank you for playing ' + nameOfUser + '! Final score: ' + score);
+}// end of Game function
 
 /// HELPER FUNCTIONS:
 //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
