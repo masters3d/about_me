@@ -38,6 +38,7 @@ alert('Hi ' + nameOfUser + '! Please click on Start Guessing Game to play a ques
 function guessingGame(){ // eslint-disable-line no-unused-vars
 // We will shuffle the array to get different orders
   questions = shuffle(questions);
+  showQuitInfo(0);
 
   for (var i = 0; i < questions.length; i += 1) {
     console.log('user response is: ' + response);
@@ -86,11 +87,15 @@ function guessingGame(){ // eslint-disable-line no-unused-vars
     } // question loop
     console.log(nameOfUser + ' answered: ' + response);
     if (response === 'quit') { break; }
-    var questionLeftStatus = i + 1 + '/' + questions.length + ' Question(s).';
-    response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
+    showQuitInfo(i + 1);
   } // Game Loop
   alert('Thank you for playing ' + nameOfUser + '! Final score: ' + score);
 }// end of Game function
+
+function showQuitInfo(questionNumber) {
+  var questionLeftStatus = questionNumber + '/' + questions.length + ' Question(s).';
+  response = prompt('Press OK for next question or to stop enter \'quit\' at any question prompt during the game. ' + questionLeftStatus);
+}
 
 /// HELPER FUNCTIONS:
 //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
